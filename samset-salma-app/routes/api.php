@@ -5,20 +5,11 @@ use App\Models\AsetBangunan;
 use Illuminate\Http\Request;
 use App\Models\AsetKendaraan;
 use Illuminate\Support\Facades\Route;
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 use App\Models\AsetFurniturePeralatan;
->>>>>>> Stashed changes
 use App\Http\Controllers\AsetTanahController;
 use App\Http\Controllers\AsetBangunanController;
 use App\Http\Controllers\AsetKendaraanController;
 use App\Http\Controllers\AsetFurniturePeralatanController;
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
 /*
 |--------------------------------------------------------------------------
