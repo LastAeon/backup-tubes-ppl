@@ -14,7 +14,7 @@ class CreateAsetFurniturePeralatanTable extends Migration
     public function up()
     {
         Schema::create('aset_furniture_peralatan', function (Blueprint $table) {
-            $table->integer('Idx')->primary();
+            $table->increments('Idx');
             $table->string('nama_barang')->nullable();
             $table->string('merk_type')->nullable();
             $table->string('kategori')->nullable();

@@ -14,7 +14,7 @@ class CreateAsetTanahTable extends Migration
     public function up()
     {
         Schema::create('aset_tanah', function (Blueprint $table) {
-            $table->integer('Idx')->primary();
+            $table->increments('Idx');
             $table->string('Jalan')->nullable();
             $table->integer('No')->nullable();
             $table->integer('RT')->nullable();

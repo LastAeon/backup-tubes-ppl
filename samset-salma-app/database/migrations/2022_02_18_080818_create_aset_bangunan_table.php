@@ -14,7 +14,7 @@ class CreateAsetBangunanTable extends Migration
     public function up()
     {
         Schema::create('aset_bangunan', function (Blueprint $table) {
-            $table->integer('Idx')->primary();
+            $table->increments('Idx');
             $table->string('Nama_Bangunan')->nullable();
             $table->string('Alamat')->nullable();
             $table->integer('Luas_Bangunan')->nullable();
