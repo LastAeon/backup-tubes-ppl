@@ -46,7 +46,7 @@ class AsetKendaraanController extends Controller
      */
     public function show($id)
     {
-        //
+        return AsetKendaraan::findorFail($id);
     }
 
     /**

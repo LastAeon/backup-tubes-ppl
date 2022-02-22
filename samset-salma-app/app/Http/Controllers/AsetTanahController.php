@@ -46,7 +46,7 @@ class AsetTanahController extends Controller
      */
     public function show($id)
     {
-        //
+        return AsetTanah::findorFail($id);
     }
 
     /**

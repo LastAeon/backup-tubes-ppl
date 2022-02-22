@@ -46,7 +46,8 @@ class AsetBangunanController extends Controller
      */
     public function show($id)
     {
-        //
+
+        return AsetBangunan::findorFail($id);
     }
 
     /**

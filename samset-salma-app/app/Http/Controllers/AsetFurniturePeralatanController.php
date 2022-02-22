@@ -46,7 +46,7 @@ class AsetFurniturePeralatanController extends Controller
      */
     public function show($id)
     {
-        //
+        return AsetFurniturePeralatan::findorFail($id);
     }
 
     /**
