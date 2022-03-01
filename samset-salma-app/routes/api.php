@@ -1,7 +1,15 @@
 <?php
 
+use App\Models\AsetTanah;
+use App\Models\AsetBangunan;
 use Illuminate\Http\Request;
+use App\Models\AsetKendaraan;
 use Illuminate\Support\Facades\Route;
+use App\Models\AsetFurniturePeralatan;
+use App\Http\Controllers\AsetTanahController;
+use App\Http\Controllers\AsetBangunanController;
+use App\Http\Controllers\AsetKendaraanController;
+use App\Http\Controllers\AsetFurniturePeralatanController;
 
 /*
 |--------------------------------------------------------------------------
