@@ -104,4 +104,21 @@ Route::post("asetKendaraan/filter", function(Request $request){
         $query->where($value[0], $value[1], $value[2]);
     }
     return $query->get();
+
+// search
+Route::get("asetBangunan/search/{search}", function($search){
+    return AsetBangunan::where('nama_bangunan', 'like', '%'.$search.'%')->get();
+});
+
+Route::get("asetTanah/search/{search}", function($search){
+    return AsetTanah::where('no_sertifikat', 'like', '%'.$search.'%')->get();
+});
+
+Route::get("asetFurniturPeralatan/search/{search}", function($search){
+    return AsetFurniturePeralatan::where('nama_barang', 'like', '%'.$search.'%')->get();
+});
+
+Route::get("asetKendaraan/search/{search}", function($search){
+    return AsetKendaraan::where('jenis_merk', 'like', '%'.$search.'%')->get();
+>>>>>>> samset-salma-app/routes/api.php
 });
