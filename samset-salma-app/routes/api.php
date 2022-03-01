@@ -120,5 +120,4 @@ Route::get("asetFurniturPeralatan/search/{search}", function($search){
 
 Route::get("asetKendaraan/search/{search}", function($search){
     return AsetKendaraan::where('jenis_merk', 'like', '%'.$search.'%')->get();
->>>>>>> samset-salma-app/routes/api.php
 });
