@@ -47,3 +47,20 @@ Route::get("asetKendaraan/page/{page}", function($page){
     $total = 10;
     return AsetKendaraan::offset(($page-1)*$total)->limit($total)->get();
 });
+
+// search
+Route::get("asetBangunan/search/{search}", function($search){
+    return AsetBangunan::where('nama_bangunan', 'like', '%'.$search.'%')->get();
+});
+
+Route::get("asetTanah/search/{search}", function($search){
+    return AsetTanah::where('no_sertifikat', 'like', '%'.$search.'%')->get();
+});
+
+Route::get("asetFurniturPeralatan/search/{search}", function($search){
+    return AsetFurniturePeralatan::where('nama_barang', 'like', '%'.$search.'%')->get();
+});
+
+Route::get("asetKendaraan/search/{search}", function($search){
+    return AsetKendaraan::where('jenis_merk', 'like', '%'.$search.'%')->get();
+});
