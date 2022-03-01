@@ -104,6 +104,7 @@ Route::post("asetKendaraan/filter", function(Request $request){
         $query->where($value[0], $value[1], $value[2]);
     }
     return $query->get();
+});
 
 // search
 Route::get("asetBangunan/search/{search}", function($search){
