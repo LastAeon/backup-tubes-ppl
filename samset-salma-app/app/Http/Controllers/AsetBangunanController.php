@@ -35,9 +35,9 @@ class AsetBangunanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [ //inputs are not empty or null
-            'idx' => 'required',
-        ]);
+        // $this->validate($request, [ //inputs are not empty or null
+        //     'idx' => 'required',
+        // ]);
   
         $item = new AsetBangunan();
 
@@ -50,12 +50,12 @@ class AsetBangunanController extends Controller
         $data = [];
         $i = 0;
         foreach($labels as $label){
-            if($i != 0){
-                $data[$label] = $request->input($label, null);
-            }
+            $data[$label] = $request->input($label, null);
             $i++;
         }
-        $item->create($data);    
+        $item->create($data);
+        echo "masuk store";
+        var_dump($data);
 
         return $item; //returns the stored value if the operation was successful.
 

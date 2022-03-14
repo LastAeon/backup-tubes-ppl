@@ -44,7 +44,6 @@ class AsetFurniturePeralatan extends Model
 
     private $labels = [
         // fill the database column name
-        'Idx',
         'nama_barang',
         'merk_type',
         'kategori',

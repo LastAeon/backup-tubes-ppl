@@ -50,9 +50,7 @@ class AsetFurniturePeralatanController extends Controller
         $data = [];
         $i = 0;
         foreach($labels as $label){
-            if($i != 0){
-                $data[$label] = $request->input($label, null);
-            }
+            $data[$label] = $request->input($label, null);
             $i++;
         }
         $item->create($data);    

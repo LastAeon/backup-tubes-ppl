@@ -45,7 +45,6 @@ class AsetBangunan extends Model
 
     private $labels = [
         // fill the database column name
-        'Idx',
         'Nama_Bangunan',
         'Alamat',
         'Luas_Bangunan',

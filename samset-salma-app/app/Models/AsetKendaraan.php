@@ -46,7 +46,6 @@ class AsetKendaraan extends Model
 
     private $labels = [
         // fill the database column name
-        'Idx',
         'Jenis_merk',
         'nomor_mesin',
         'nomor_rangka',

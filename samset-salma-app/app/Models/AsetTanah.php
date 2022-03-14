@@ -47,7 +47,6 @@ class AsetTanah extends Model
 
     private $labels = [
         // fill the database column name
-        'Idx',
         'Jalan',
         'No',
         'RT',
