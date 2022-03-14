@@ -35,7 +35,14 @@ class AsetFurniturePeralatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [ //inputs are not empty or null
+            'idx' => 'required',
+        ]);
+  
+        $item = new AsetFurniturePeralatan();
+        $item->Idx = $request->input('idx'); //retrieving user inputs
+        $item->save(); //storing values as an object
+        return $item; //returns the stored value if the operation was successful.
     }
 
     /**
