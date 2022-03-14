@@ -39,10 +39,26 @@ class AsetBangunanController extends Controller
             'idx' => 'required',
         ]);
   
-        $task = new AsetBangunan();
-        $task->Idx = $request->input('idx'); //retrieving user inputs
-        $task->save(); //storing values as an object
-        return $task; //returns the stored value if the operation was successful.
+        $item = new AsetBangunan();
+
+        // cara 1 pake save
+        // $item->nama_bangunan = $request->input('idx'); //retrieving user inputs
+        // $item->save(); //storing values as an object
+        
+        // cara 2 pake create
+        $labels = $item->getLabel();
+        $data = [];
+        $i = 0;
+        foreach($labels as $label){
+            if($i != 0){
+                $data[$label] = $request->input($label, null);
+            }
+            $i++;
+        }
+        $item->create($data);    
+
+        return $item; //returns the stored value if the operation was successful.
+
     }
 
     /**

@@ -40,8 +40,23 @@ class AsetFurniturePeralatanController extends Controller
         ]);
   
         $item = new AsetFurniturePeralatan();
-        $item->Idx = $request->input('idx'); //retrieving user inputs
-        $item->save(); //storing values as an object
+
+        // cara 1 pake save
+        // $item->nama_bangunan = $request->input('idx'); //retrieving user inputs
+        // $item->save(); //storing values as an object
+        
+        // cara 2 pake create
+        $labels = $item->getLabel();
+        $data = [];
+        $i = 0;
+        foreach($labels as $label){
+            if($i != 0){
+                $data[$label] = $request->input($label, null);
+            }
+            $i++;
+        }
+        $item->create($data);    
+
         return $item; //returns the stored value if the operation was successful.
     }
 
