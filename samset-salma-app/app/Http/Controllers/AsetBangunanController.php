@@ -35,7 +35,14 @@ class AsetBangunanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [ //inputs are not empty or null
+            'idx' => 'required',
+        ]);
+  
+        $task = new AsetBangunan();
+        $task->Idx = $request->input('idx'); //retrieving user inputs
+        $task->save(); //storing values as an object
+        return $task; //returns the stored value if the operation was successful.
     }
 
     /**
