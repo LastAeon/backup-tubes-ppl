@@ -54,8 +54,7 @@ class AsetBangunanController extends Controller
             $i++;
         }
         $item->create($data);
-        echo "masuk store";
-        var_dump($data);
+        // var_dump($data);
 
         return $item; //returns the stored value if the operation was successful.
 
