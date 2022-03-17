@@ -55,7 +55,7 @@ class AsetTanahController extends Controller
         }
         $item->create($data);    
 
-        return $item; //returns the stored value if the operation was successful.
+        return $data; //returns the stored value if the operation was successful.
     }
 
     /**
