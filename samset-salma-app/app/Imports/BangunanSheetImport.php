@@ -3,19 +3,21 @@
 namespace App\Imports;
 
 use App\Models\AsetBangunan;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
-class BangunanSheetImport implements ToModel
+class BangunanSheetImport implements ToCollection, WithCalculatedFormulas
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
+    * @param Collection $collection
     */
-    public function model(array $row)
+    public function collection(Collection $collection)
     {
-        return new AsetBangunan([
-            //
-        ]);
+        $item = new AsetBangunan();
+        $labels = $item->getLabel();
+        foreach($collection as $row){
+            (new ImportHelper)->insertAset($row, $labels, $item);
+        }
     }
 }
