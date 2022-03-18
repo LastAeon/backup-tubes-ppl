@@ -13,3 +13,9 @@ contoh:\
 callpoint: http://127.0.0.1:8000/api/importAset \
 tipe: post\
 body: file:{filenya}
+
+note:
+install laravel excel dulu, caranya:
+- uncomment extension=gd di php.ini
+- jalanin di terminal 
+>composer require maatwebsite/excel --with-all-dependencies
