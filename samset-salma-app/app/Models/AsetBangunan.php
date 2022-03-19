@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AsetBangunan extends Model
 {
+
     public $timestamps = false;
     /**
      * The table associated with the model.
@@ -42,4 +43,24 @@ class AsetBangunan extends Model
      */
     protected $fillable = ['Nama Bangunan', 'Alamat', 'Luas_Bangunan', 'Jumlah_Lantai', 'Tahun_Dibangun', 'Tahun_Digunakan', 'Nilai_Perolehan', 'Penambahan_Nilai_Manfaat', 'Umur_Ekonomis', 'Lama_Digunakan', 'Tarif', 'Akumulasi', 'Nilai_Buku'];
 
+    private $labels = [
+        // fill the database column name
+        'Nama_Bangunan',
+        'Alamat',
+        'Luas_Bangunan',
+        'Jumlah_Lantai',
+        'Tahun_Dibangun',
+        'Tahun_Digunakan',
+        'Nilai_Perolehan',
+        'Penambahan_Nilai_Manfaat',
+        'Umur_Ekonomis',
+        'Lama_Digunakan',
+        'Tarif',
+        'Akumulasi',
+        'Nilai_Buku',
+    ];
+
+    public function getLabel(){
+        return $this->labels;
+    }
 }

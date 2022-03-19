@@ -45,4 +45,27 @@ class AsetTanah extends Model
      */
     protected $fillable = ['Jalan', 'No', 'RT', 'RW', 'Desa_Kelurahan', 'Kecamatan', 'Kabupaten_Kota', 'Propinsi', 'Tanggal_Perolehan', 'No_Persil', 'No_Sertifikat', 'NIB', 'Luas', 'Harga_Satuan', 'Nilai_Perolehan', 'Keterangan'];
 
+    private $labels = [
+        // fill the database column name
+        'Jalan',
+        'No',
+        'RT',
+        'RW',
+        'Desa_Kelurahan',
+        'Kecamatan',
+        'Kabupaten_Kota',
+        'Propinsi',
+        'Tanggal_Perolehan',
+        'No_Persil',
+        'No_Sertifikat',
+        'NIB',
+        'Luas',
+        'Harga_Satuan',
+        'Nilai_Perolehan',
+        'Keterangan',
+    ];
+
+    public function getLabel(){
+        return $this->labels;
+    }
 }
