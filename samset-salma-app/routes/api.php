@@ -10,6 +10,8 @@ use App\Http\Controllers\AsetTanahController;
 use App\Http\Controllers\AsetBangunanController;
 use App\Http\Controllers\AsetKendaraanController;
 use App\Http\Controllers\AsetFurniturePeralatanController;
+use App\Http\Controllers\AsetImportController;
+use App\Imports\AsetImport;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,3 +129,6 @@ Route::get("asetFurniturPeralatan/search/{search}", function($search){
 Route::get("asetKendaraan/search/{search}", function($search){
     return AsetKendaraan::where('jenis_merk', 'like', '%'.$search.'%')->get();
 });
+
+// import excel
+Route::post("importAset", [AsetImportController::class, 'store']);
