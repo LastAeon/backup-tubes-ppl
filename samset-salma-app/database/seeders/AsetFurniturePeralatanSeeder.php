@@ -18,6 +18,6 @@ class AsetFurniturePeralatanSeeder extends Seeder
         $model = new AsetFurniturePeralatan();
         $model->truncate();
         $helper = new SeederHelper();
-        $helper->parseCSV("database\data\FurniturePeralatan.csv", $model->getLabel(), $model);
+        $helper->parseCSV("database/data/FurniturePeralatan.csv", $model->getLabel(), $model);
     }
 }
