@@ -18,6 +18,6 @@ class AsetKendaraanSeeder extends Seeder
         $model = new AsetKendaraan();
         $model->truncate();
         $helper = new SeederHelper();
-        $helper->parseCSV("database\data\Kendaraan.csv", $model->getLabel(), $model);
+        $helper->parseCSV("database/data/Kendaraan.csv", $model->getLabel(), $model);
     }
 }

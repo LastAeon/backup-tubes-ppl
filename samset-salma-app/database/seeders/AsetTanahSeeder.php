@@ -18,6 +18,6 @@ class AsetTanahSeeder extends Seeder
         $model = new AsetTanah();
         $model->truncate();
         $helper = new SeederHelper();
-        $helper->parseCSV("database\data\Tanah.csv", $model->getLabel(), $model);
+        $helper->parseCSV("database/data/Tanah.csv", $model->getLabel(), $model);
     }
 }

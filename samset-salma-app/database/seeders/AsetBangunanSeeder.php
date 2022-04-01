@@ -19,6 +19,6 @@ class AsetBangunanSeeder extends Seeder
         $model = new AsetBangunan();
         $model->truncate();
         $helper = new SeederHelper();
-        $helper->parseCSV("database\data\Bangunan.csv", $model->getLabel(), $model);
+        $helper->parseCSV("database/data/Bangunan.csv", $model->getLabel(), $model);
     }
 }
