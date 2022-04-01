@@ -7,6 +7,7 @@ build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
     - cd samset-salma-app
+    - ubuntu
     - composer install
     - cp .env.example .env
     - php artisan key:generate
