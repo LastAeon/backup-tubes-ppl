@@ -31,6 +31,8 @@ class CreateAsetTanahTable extends Migration
             $table->integer('Harga_Satuan')->nullable();
             $table->integer('Nilai_Perolehan')->nullable();
             $table->string('Keterangan')->nullable();
+            $table->string('Foto')->nullable();
+            $table->string('Pendukung')->nullable();
         });
     }
 

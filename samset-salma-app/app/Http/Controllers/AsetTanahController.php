@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AsetTanah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AsetTanahController extends Controller
 {
@@ -35,18 +36,23 @@ class AsetTanahController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [ //inputs are not empty or null
-            'idx' => 'required',
-        ]);
-  
         $item = new AsetTanah();
-        
-        // cara 1 pake save
-        // $item->nama_bangunan = $request->input('idx'); //retrieving user inputs
-        // $item->save(); //storing values as an object
+        $labels = $item->getLabel();
+
+        $rules = [];
+        foreach($labels as $label){
+            $rules[$label] = 'nullable';
+        }
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            foreach ($validator->errors()->all() as $message) {
+                echo $message;
+            }
+            return;
+        }
         
         // cara 2 pake create
-        $labels = $item->getLabel();
         $data = [];
         $i = 0;
         foreach($labels as $label){
