@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Observable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AsetKendaraan extends Model
 {
+    use Observable;
     public $timestamps = false;
     /**
      * The table associated with the model.
@@ -67,11 +69,12 @@ class AsetKendaraan extends Model
         return $this->labels;
     }
 
+    public $tableCode = "AK";
     protected static function boot(){
         parent::boot();
         static::created(function ($model) {
-            $model->Global_Id = 'AK' . $model->Idx;
-            $model->save();
+            $model->Global_Id = $model->tableCode . $model->Idx;
+            $model->saveQuietly();
         });
     }
 }

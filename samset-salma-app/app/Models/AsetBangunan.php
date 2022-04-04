@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Observable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AsetBangunan extends Model
 {
-
+    use Observable;
     public $timestamps = false;
     /**
      * The table associated with the model.
@@ -60,15 +61,17 @@ class AsetBangunan extends Model
         'Nilai_Buku',
     ];
 
+    
     public function getLabel(){
         return $this->labels;
     }
 
+    public $tableCode = "AB";
     protected static function boot(){
         parent::boot();
         static::created(function ($model) {
-            $model->Global_Id = 'AB' . $model->Idx;
-            $model->save();
+            $model->Global_Id = $model->tableCode . $model->Idx;
+            $model->saveQuietly();
         });
     }
 }
