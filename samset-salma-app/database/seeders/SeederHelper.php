@@ -44,5 +44,4 @@ class SeederHelper
         fclose($csvFile);
         // $model->logStatus = $temp;
     }
-
 }
