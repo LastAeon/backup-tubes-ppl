@@ -12,6 +12,8 @@ aset bangunan:
 'Tarif',
 'Akumulasi',
 'Nilai_Buku',
+'Foto',
+'Pendukung',
 
 aset furniture dan peralatan:
 'nama_barang',
@@ -27,6 +29,8 @@ aset furniture dan peralatan:
 'akumulasi_penyusutan',
 'nilai_buku',
 'PJ',
+'Foto',
+'Pendukung',
 
 aset kendaraan:
 'Jenis_merk',
@@ -44,6 +48,8 @@ aset kendaraan:
 'akumulasi_penyusutan',
 'nilai_buku',
 'pj',
+'Foto',
+'Pendukung',
 
 aset tanah:
 'Jalan',
@@ -62,3 +68,5 @@ aset tanah:
 'Harga_Satuan',
 'Nilai_Perolehan',
 'Keterangan',
+'Foto',
+'Pendukung',
