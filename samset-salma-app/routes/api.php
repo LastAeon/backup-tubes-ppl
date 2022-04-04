@@ -36,7 +36,7 @@ Route::resource('asetTanah', AsetTanahController::class);
 Route::resource('asetBangunan', AsetBangunanController::class);
 Route::resource('asetFurniturPeralatan', AsetFurniturePeralatanController::class);
 Route::resource('asetKendaraan', AsetKendaraanController::class);
-Route::resource('history', ChangeLogController::class);
+// Route::resource('history', ChangeLogController::class);
 
 // paging
 Route::get("asetBangunan/page/{page}", function($page){
@@ -150,6 +150,9 @@ Route::get("history/interval/{interval}", function($interval){
     }
     if($interval == 'y'){
         return ChangeLog::where('created_at', '>=', Carbon::now()->subYear()->toDateTimeString())->get();
+    }
+    if($interval == 'a'){
+        return ChangeLog::orderBy('id', 'asc')->get();
     }
     return "wrong interval";
 });
