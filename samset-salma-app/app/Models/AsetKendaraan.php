@@ -42,7 +42,7 @@ class AsetKendaraan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj', 'Foto', 'Pendukung'];
+    protected $fillable = ['Global_Id', 'Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj', 'Foto', 'Pendukung'];
 
     private $labels = [
         // fill the database column name
@@ -65,5 +65,13 @@ class AsetKendaraan extends Model
 
     public function getLabel(){
         return $this->labels;
+    }
+
+    protected static function boot(){
+        parent::boot();
+        static::created(function ($model) {
+            $model->Global_Id = 'AK' . $model->Idx;
+            $model->save();
+        });
     }
 }

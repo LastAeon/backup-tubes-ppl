@@ -43,7 +43,7 @@ class AsetTanah extends Model
     /**
      * @var array
      */
-    protected $fillable = ['Jalan', 'No', 'RT', 'RW', 'Desa_Kelurahan', 'Kecamatan', 'Kabupaten_Kota', 'Propinsi', 'Tanggal_Perolehan', 'No_Persil', 'No_Sertifikat', 'NIB', 'Luas', 'Harga_Satuan', 'Nilai_Perolehan', 'Keterangan', 'Foto', 'Pendukung'];
+    protected $fillable = ['Global_Id', 'Jalan', 'No', 'RT', 'RW', 'Desa_Kelurahan', 'Kecamatan', 'Kabupaten_Kota', 'Propinsi', 'Tanggal_Perolehan', 'No_Persil', 'No_Sertifikat', 'NIB', 'Luas', 'Harga_Satuan', 'Nilai_Perolehan', 'Keterangan', 'Foto', 'Pendukung'];
 
     private $labels = [
         // fill the database column name
@@ -67,5 +67,13 @@ class AsetTanah extends Model
 
     public function getLabel(){
         return $this->labels;
+    }
+
+    protected static function boot(){
+        parent::boot();
+        static::created(function ($model) {
+            $model->Global_Id = 'AT' . $model->Idx;
+            $model->save();
+        });
     }
 }

@@ -15,6 +15,7 @@ class CreateAsetKendaraanTable extends Migration
     {
         Schema::create('aset_kendaraan', function (Blueprint $table) {
             $table->increments('Idx');
+            $table->string('Global_Id')->nullable();
             $table->string('Jenis_merk')->nullable();
             $table->string('nomor_mesin')->nullable();
             $table->string('nomor_rangka')->nullable();
