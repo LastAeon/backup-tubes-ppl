@@ -43,11 +43,14 @@ class AsetTanahController extends Controller
         foreach($labels as $label){
             $rules[$label] = 'nullable';
         }
+        $rules['Foto'] = 'nullable|image';
+        $rules['Pendukung'] = 'nullable|image';
+        // var_dump($rules);
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             foreach ($validator->errors()->all() as $message) {
-                echo $message;
+                echo "something wrong";
             }
             return;
         }
@@ -59,7 +62,20 @@ class AsetTanahController extends Controller
             $data[$label] = $request->input($label, null);
             $i++;
         }
-        $item->create($data);    
+        
+        if($request->hasFile('Foto')){
+            $uploadFolder = 'Foto';
+            $image = $request->file('Foto');
+            $image_uploaded_path = $image->store($uploadFolder, 'public');
+            $data['Foto'] = asset('storage/'.$image_uploaded_path);
+        }
+        if($request->hasFile('Pendukung')){
+            $uploadFolder = 'Pendukung';
+            $image = $request->file('Pendukung');
+            $image_uploaded_path = $image->store($uploadFolder, 'public');
+            $data['Pendukung'] = asset('storage/'.$image_uploaded_path);
+        }
+        $item->create($data); 
 
         return $data; //returns the stored value if the operation was successful.
     }
