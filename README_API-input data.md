@@ -26,8 +26,14 @@ note:
 - key buat upload gambar adalah "Foto" dan "Pendukung"
 - gambar bisa langsung di akses di url yang ada di kolom foto/pendukung
 - kalo gabisa dibuka coba jalanin ini di wsl:
+
+jalanin docker/sail:
 ```
 cd samset-salma-app
 ./vendor/bin/sail up
+```
+enable storage access:
+```
+cd samset-salma-app
 ./vendor/bin/sail artisan storage:link
 ```
