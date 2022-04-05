@@ -29,14 +29,15 @@ class SeederHelper
                 foreach($labels as $label){
                     $row[$i] = trim($row[$i]);
                     if($row[$i] == '' or $row[$i] == '-' or $row[$i] == '#REF!'){
-                        $model->$label = null;
+                        $model->{$label} = null;
                     }else{
-                        $model->$label = $row[$i];
+                        $model->{$label} = $row[$i];
                     }
                     $i++;
                 }
                 $model->Global_Id = $model->tableCode . $model->Idx;
                 $model->saveQuietly();
+                $model = $model->new();
             }
             $firstline = false;
         }

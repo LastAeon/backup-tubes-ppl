@@ -77,4 +77,8 @@ class AsetKendaraan extends Model
             $model->saveQuietly();
         });
     }
+
+    public function new(){
+        return new AsetKendaraan();
+    }
 }

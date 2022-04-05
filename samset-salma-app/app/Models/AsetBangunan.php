@@ -42,7 +42,7 @@ class AsetBangunan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['Global_Id', 'Nama Bangunan', 'Alamat', 'Luas_Bangunan', 'Jumlah_Lantai', 'Tahun_Dibangun', 'Tahun_Digunakan', 'Nilai_Perolehan', 'Penambahan_Nilai_Manfaat', 'Umur_Ekonomis', 'Lama_Digunakan', 'Tarif', 'Akumulasi', 'Nilai_Buku', 'Foto', 'Pendukung'];
+    protected $fillable = ['Global_Id', 'nama_bangunan', 'Alamat', 'Luas_Bangunan', 'Jumlah_Lantai', 'Tahun_Dibangun', 'Tahun_Digunakan', 'Nilai_Perolehan', 'Penambahan_Nilai_Manfaat', 'Umur_Ekonomis', 'Lama_Digunakan', 'Tarif', 'Akumulasi', 'Nilai_Buku', 'Foto', 'Pendukung'];
 
     private $labels = [
         // fill the database column name
@@ -73,5 +73,9 @@ class AsetBangunan extends Model
             $model->Global_Id = $model->tableCode . $model->Idx;
             $model->saveQuietly();
         });
+    }
+
+    public function new(){
+        return new AsetBangunan();
     }
 }

@@ -79,4 +79,8 @@ class AsetTanah extends Model
             $model->saveQuietly();
         });
     }
+
+    public function new(){
+        return new AsetTanah();
+    }
 }

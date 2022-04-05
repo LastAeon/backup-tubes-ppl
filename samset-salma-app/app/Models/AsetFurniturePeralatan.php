@@ -73,4 +73,8 @@ class AsetFurniturePeralatan extends Model
             $model->saveQuietly();
         });
     }
+
+    public function new(){
+        return new AsetFurniturePeralatan();
+    }
 }
