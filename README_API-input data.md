@@ -26,7 +26,7 @@ note:
 - tabelnya ganti jadi harus migrate dulu. buat migrate jalanin dulu docker/sailnya terus pake command ini di wsl:
 ```
 cd samset-salma-app
-./vendor/bin/sail migrate:refresh --seed
+./vendor/bin/sail artisan migrate:refresh --seed
 ```
 - key buat upload gambar adalah "Foto" dan "Pendukung"
 - gambar bisa langsung di akses di url yang ada di kolom foto/pendukung
