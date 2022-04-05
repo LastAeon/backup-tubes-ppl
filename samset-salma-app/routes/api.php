@@ -1,17 +1,20 @@
 <?php
 
 use App\Models\AsetTanah;
+use App\Models\ChangeLog;
+use App\Imports\AsetImport;
 use App\Models\AsetBangunan;
 use Illuminate\Http\Request;
 use App\Models\AsetKendaraan;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Models\AsetFurniturePeralatan;
 use App\Http\Controllers\AsetTanahController;
+use App\Http\Controllers\ChangeLogController;
+use App\Http\Controllers\AsetImportController;
 use App\Http\Controllers\AsetBangunanController;
 use App\Http\Controllers\AsetKendaraanController;
 use App\Http\Controllers\AsetFurniturePeralatanController;
-use App\Http\Controllers\AsetImportController;
-use App\Imports\AsetImport;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +36,7 @@ Route::resource('asetTanah', AsetTanahController::class);
 Route::resource('asetBangunan', AsetBangunanController::class);
 Route::resource('asetFurniturPeralatan', AsetFurniturePeralatanController::class);
 Route::resource('asetKendaraan', AsetKendaraanController::class);
+// Route::resource('history', ChangeLogController::class);
 
 // paging
 Route::get("asetBangunan/page/{page}", function($page){
@@ -132,3 +136,23 @@ Route::get("asetKendaraan/search/{search}", function($search){
 
 // import excel
 Route::post("importAset", [AsetImportController::class, 'store']);
+
+// history
+Route::get("history/interval/{interval}", function($interval){
+    if($interval == 'd'){
+        return ChangeLog::where('created_at', '>=', Carbon::now()->subDays(1)->toDateTimeString())->get();
+    }
+    if($interval == 'w'){
+        return ChangeLog::where('created_at', '>=', Carbon::now()->subDays(7)->toDateTimeString())->get();
+    }
+    if($interval == 'm'){
+        return ChangeLog::where('created_at', '>=', Carbon::now()->subMonth()->toDateTimeString())->get();
+    }
+    if($interval == 'y'){
+        return ChangeLog::where('created_at', '>=', Carbon::now()->subYear()->toDateTimeString())->get();
+    }
+    if($interval == 'a'){
+        return ChangeLog::orderBy('id', 'asc')->get();
+    }
+    return "wrong interval";
+});

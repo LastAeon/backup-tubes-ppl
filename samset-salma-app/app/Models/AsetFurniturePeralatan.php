@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Observable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AsetFurniturePeralatan extends Model
 {
+    use Observable;
     public $timestamps = false;
     /**
      * The table associated with the model.
@@ -40,7 +42,7 @@ class AsetFurniturePeralatan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['nama_barang', 'merk_type', 'kategori', 'tahun_perolehan', 'sumber_perolehan', 'jumlah_perolehan', 'harga_satuan_perolehan', 'nilai_perolehan', 'UE_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'PJ', 'Foto', 'Pendukung'];
+    protected $fillable = ['Global_Id', 'nama_barang', 'merk_type', 'kategori', 'tahun_perolehan', 'sumber_perolehan', 'jumlah_perolehan', 'harga_satuan_perolehan', 'nilai_perolehan', 'UE_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'PJ', 'Foto', 'Pendukung'];
 
     private $labels = [
         // fill the database column name
@@ -61,5 +63,14 @@ class AsetFurniturePeralatan extends Model
 
     public function getLabel(){
         return $this->labels;
+    }
+
+    public $tableCode = "AFP";
+    protected static function boot(){
+        parent::boot();
+        static::created(function ($model) {
+            $model->Global_Id = $model->tableCode . $model->Idx;
+            $model->saveQuietly();
+        });
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Observable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AsetKendaraan extends Model
 {
+    use Observable;
     public $timestamps = false;
     /**
      * The table associated with the model.
@@ -42,7 +44,7 @@ class AsetKendaraan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj', 'Foto', 'Pendukung'];
+    protected $fillable = ['Global_Id', 'Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj', 'Foto', 'Pendukung'];
 
     private $labels = [
         // fill the database column name
@@ -65,5 +67,14 @@ class AsetKendaraan extends Model
 
     public function getLabel(){
         return $this->labels;
+    }
+
+    public $tableCode = "AK";
+    protected static function boot(){
+        parent::boot();
+        static::created(function ($model) {
+            $model->Global_Id = $model->tableCode . $model->Idx;
+            $model->saveQuietly();
+        });
     }
 }
