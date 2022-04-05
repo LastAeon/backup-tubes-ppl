@@ -28,6 +28,8 @@ class CreateAsetBangunanTable extends Migration
             $table->float('Tarif')->nullable();
             $table->integer('Akumulasi')->nullable();
             $table->integer('Nilai_Buku')->nullable();
+            $table->string('Foto')->nullable();
+            $table->string('Pendukung')->nullable();
         });
     }
 

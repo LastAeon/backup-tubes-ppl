@@ -30,6 +30,8 @@ class CreateAsetKendaraanTable extends Migration
             $table->float('akumulasi_penyusutan')->nullable();
             $table->integer('nilai_buku')->nullable();
             $table->string('pj')->nullable();
+            $table->string('Foto')->nullable();
+            $table->string('Pendukung')->nullable();
         });
     }
 

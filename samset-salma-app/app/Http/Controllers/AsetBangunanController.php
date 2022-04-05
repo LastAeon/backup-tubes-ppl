@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AsetBangunan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AsetBangunanController extends Controller
 {
@@ -35,25 +37,48 @@ class AsetBangunanController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [ //inputs are not empty or null
-        //     'idx' => 'required',
-        // ]);
-  
         $item = new AsetBangunan();
+        $labels = $item->getLabel();
 
-        // cara 1 pake save
-        // $item->nama_bangunan = $request->input('idx'); //retrieving user inputs
-        // $item->save(); //storing values as an object
+        $rules = [];
+        foreach($labels as $label){
+            $rules[$label] = 'nullable';
+        }
+        $rules['Foto'] = 'nullable|image';
+        $rules['Pendukung'] = 'nullable|image';
+        // var_dump($rules);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            foreach ($validator->errors()->all() as $message) {
+                echo "something wrong";
+            }
+            return;
+        }
         
         // cara 2 pake create
-        $labels = $item->getLabel();
         $data = [];
         $i = 0;
         foreach($labels as $label){
             $data[$label] = $request->input($label, null);
             $i++;
         }
+
+        
+        if($request->hasFile('Foto')){
+            $uploadFolder = 'Foto';
+            $image = $request->file('Foto');
+            $image_uploaded_path = $image->store($uploadFolder, 'public');
+            $data['Foto'] = asset('storage/'.$image_uploaded_path);
+        }
+        if($request->hasFile('Pendukung')){
+            $uploadFolder = 'Pendukung';
+            $image = $request->file('Pendukung');
+            $image_uploaded_path = $image->store($uploadFolder, 'public');
+            $data['Pendukung'] = asset('storage/'.$image_uploaded_path);
+        }
         $item->create($data);
+        
         // var_dump($data);
 
         return $data; //returns the stored value if the operation was successful.
