@@ -156,3 +156,33 @@ Route::get("history/interval/{interval}", function($interval){
     }
     return "wrong interval";
 });
+
+// Update
+
+// request body : {"Idx" : 3 , "key" : "value"}
+
+Route::post("asetBangunan/update/{id}", function(Request $request, $id){
+
+    $input = $request->only(['Nama Bangunan', 'Alamat', 'Luas_Bangunan', 'Jumlah_Lantai', 'Tahun_Dibangun', 'Tahun_Digunakan', 'Nilai_Perolehan', 'Penambahan_Nilai_Manfaat', 'Umur_Ekonomis', 'Lama_Digunakan', 'Tarif', 'Akumulasi', 'Nilai_Buku']);
+
+    return AsetBangunan::where('Idx', $id)->update($input);
+});
+Route::post("asetTanah/update", function(Request $request, $id){
+
+    $input = $request->only(['Jalan', 'No', 'RT', 'RW', 'Desa_Kelurahan', 'Kecamatan', 'Kabupaten_Kota', 'Propinsi', 'Tanggal_Perolehan', 'No_Persil', 'No_Sertifikat', 'NIB', 'Luas', 'Harga_Satuan', 'Nilai_Perolehan', 'Keterangan']);
+
+    return AsetTanah::where('Idx', $id)->update($input);
+});
+Route::post("asetFurniturPeralatan/update/{id}", function(Request $request, $id){
+
+    $input = $request->only(['nama_barang', 'merk_type', 'kategori', 'tahun_perolehan', 'sumber_perolehan', 'jumlah_perolehan', 'harga_satuan_perolehan', 'nilai_perolehan', 'UE_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'PJ']);
+
+    return AsetFurniturePeralatan::where('Idx', $id)->update($input);
+});
+Route::post("asetKendaraan/update/{id}", function(Request $request, $id){
+
+        $input = $request->only(['Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj']);
+
+        return AsetKendaraan::where('Idx', $id)->update($input);
+});
+

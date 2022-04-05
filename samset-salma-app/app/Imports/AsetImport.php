@@ -10,7 +10,6 @@ class AsetImport implements WithMultipleSheets
 {
     public function sheets(): array
     {
-        echo "masuk aset import";
         return [
             'Tanah' => new TanahSheetImport(),
             'Bangunan' => new BangunanSheetImport(),

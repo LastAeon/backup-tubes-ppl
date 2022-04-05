@@ -17,7 +17,7 @@ return new class extends Migration
         //   $table->unsignedBigInteger('user_id')->nullable();
           $table->string('Global_Id');
           $table->string('action',7);
-          $table->text('message');
+          $table->text('message')->nullable();
           $table->json('models');
           $table->timestamps();
       

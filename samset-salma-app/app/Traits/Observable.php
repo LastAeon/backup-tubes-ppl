@@ -33,7 +33,7 @@ trait Observable
     //   'user_id' => Auth::check() ? Auth::user()->id : null,
       'Global_Id'   => $model->Global_Id,
       'action'  => $action,
-      'message' => static::logSubject($model),
+      'message' => null,
       'models'  => [
         'new'     => $action !== 'DELETED' ? $model->getAttributes() : null,
         'old'     => $action !== 'CREATED' ? $model->getOriginal()   : null,

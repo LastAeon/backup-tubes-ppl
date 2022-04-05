@@ -117,7 +117,9 @@ class AsetBangunanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->only(['Nama Bangunan', 'Alamat', 'Luas_Bangunan', 'Jumlah_Lantai', 'Tahun_Dibangun', 'Tahun_Digunakan', 'Nilai_Perolehan', 'Penambahan_Nilai_Manfaat', 'Umur_Ekonomis', 'Lama_Digunakan', 'Tarif', 'Akumulasi', 'Nilai_Buku']);
+
+        return AsetBangunan::where('Idx', $id)->update($input);
     }
 
     /**
