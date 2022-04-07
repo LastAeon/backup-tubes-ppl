@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::orderBy('Idx', 'asc')->get();;
+        return User::get();
     }
 
     /**
@@ -55,11 +55,16 @@ class UserController extends Controller
         }
         
         // create
-        $item->name = $request->input('name');
-        $item->password = $request->input('password');
-        $item->level_akses = $request->input('level_akses');
+        try {
+            $item->name = $request->input('name');
+            $item->password = $request->input('password');
+            $item->level_akses = $request->input('level_akses');
 
-        $item->save();
+            $item->save();
+          } catch (\Illuminate\Database\QueryException $e) {
+            var_dump($e->errorInfo);
+          }
+        
 
         return $item; //returns the stored value if the operation was successful.
     }
@@ -67,12 +72,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name)
     {
-        return User::findorFail($id);
+        return User::findorFail($name);
     }
 
     // /**
@@ -86,27 +91,44 @@ class UserController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $name)
+    {
+        // validasi
+        $rules = [
+            'name' => 'string',
+            'password' => 'string',
+            'level_akses' => 'integer',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            echo "something wrong";
+            return;
+        }
+        
+        // create
+        $input = $request->only(['name', 'password', 'level_akses']);
+
+        return User::where('name', $name)->update($input); //returns the new value if the operation was successful.
+    }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($name)
     {
-        $task = User::findorFail($id); //searching for object in database using ID
+        $task = User::findorFail($name); //searching for object in database using ID
         if($task->delete()){ //deletes the object
             return 'deleted successfully'; //shows a message when the delete operation was successful.
         }

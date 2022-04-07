@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Observable;
+    // use Observable;
     public $timestamps = false;
 
     protected $table = 'user';
@@ -21,7 +21,9 @@ class User extends Authenticatable
      * 
      * @var string
      */
-    protected $primaryKey = 'Idx';
+    protected $primaryKey = 'name';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -44,9 +46,17 @@ class User extends Authenticatable
     // ];
 
     // public function setPasswordAttribute($password){
+    //     echo 'password: ';
+    //     echo $password;
+    //     echo ' \n';
+
     //     if(trim($password) === ""){
     //         return;
     //     }
-    //     $this->password = Hash::make($password);
+    //     $password = Hash::make($password);
+    //     echo 'hash: ';
+    //     echo $password;
+    //     echo ' \n';
+    //     $this->password = $password;
     // }
 }
