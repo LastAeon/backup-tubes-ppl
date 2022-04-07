@@ -29,7 +29,6 @@ use App\Http\Controllers\AsetFurniturePeralatanController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::resource('asetTanah', AsetTanahController::class);
 Route::resource('asetBangunan', AsetBangunanController::class);
 Route::resource('asetFurniturPeralatan', AsetFurniturePeralatanController::class);
@@ -198,12 +197,15 @@ Route::post("login", function(Request $request){
         return;
     }
 
-    // get level_akses
-    $user = User::where('name', '=', $request->input('name'))
-                ->where('password', 'like', $request->input('password'))
-                ->select('level_akses')
-                ->get();
-    
-    return $user;
+    // get user
+    $user = User::where('name', '=', $request->input('name'))->first();
+
+    // no username or pasword not match return -1
+    if($user == null || $request->input('password') != $user->password){
+        return -1;
+    }
+    else{ // if username and password match return akses level
+        return $user->level_akses;
+    }
 });
 

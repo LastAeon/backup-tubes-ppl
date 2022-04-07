@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
         $model->truncate();
         $model->name = 'admin';
         $model->level_akses = '2';
-        // $model->password = Hash::make('admin');
         $model->password = 'admin';
         $model->save();
         // not using helper
