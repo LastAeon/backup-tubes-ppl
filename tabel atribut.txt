@@ -1,3 +1,8 @@
+account:
+'name',
+'password',
+'level_akses',
+
 aset bangunan:
 'Nama_Bangunan',
 'Alamat',

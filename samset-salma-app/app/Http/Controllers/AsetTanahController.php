@@ -124,6 +124,11 @@ class AsetTanahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = AsetTanah::findorFail($id); //searching for object in database using ID
+        if($task->delete()){ //deletes the object
+            return 'deleted successfully'; //shows a message when the delete operation was successful.
+        }
+
+        return 'delete fail';
     }
 }
