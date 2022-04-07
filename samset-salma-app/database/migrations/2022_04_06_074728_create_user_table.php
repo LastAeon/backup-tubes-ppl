@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->increments('Idx');
-            $table->string('name');
+            $table->string('name')->unique();;
             $table->string('password');
             $table->integer('level_akses');
         });

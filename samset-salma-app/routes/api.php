@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\AsetTanah;
 use App\Models\ChangeLog;
 use App\Imports\AsetImport;
@@ -9,6 +10,8 @@ use App\Models\AsetKendaraan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Models\AsetFurniturePeralatan;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\AsetTanahController;
 use App\Http\Controllers\ChangeLogController;
 use App\Http\Controllers\AsetImportController;
@@ -27,15 +30,11 @@ use App\Http\Controllers\AsetFurniturePeralatanController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 Route::resource('asetTanah', AsetTanahController::class);
 Route::resource('asetBangunan', AsetBangunanController::class);
 Route::resource('asetFurniturPeralatan', AsetFurniturePeralatanController::class);
 Route::resource('asetKendaraan', AsetKendaraanController::class);
+Route::resource('account', UserController::class);
 // Route::resource('history', ChangeLogController::class);
 
 // paging
@@ -184,5 +183,27 @@ Route::post("asetKendaraan/update/{id}", function(Request $request, $id){
         $input = $request->only(['Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj']);
 
         return AsetKendaraan::where('Idx', $id)->update($input);
+});
+
+// login
+Route::post("login", function(Request $request){
+    // validate
+    $rules = [
+        'name' => 'required|string',
+        'password' => 'required|string',
+    ];
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        echo "post body wrong";
+        return;
+    }
+
+    // get level_akses
+    $user = User::where('name', '=', $request->input('name'))
+                ->where('password', 'like', $request->input('password'))
+                ->select('level_akses')
+                ->get();
+    
+    return $user;
 });
 
