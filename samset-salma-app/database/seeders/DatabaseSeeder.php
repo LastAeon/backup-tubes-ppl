@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AsetFurniturePeralatanSeeder::class,
             AsetKendaraanSeeder::class,
             AsetTanahSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
