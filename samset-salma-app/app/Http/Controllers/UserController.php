@@ -116,8 +116,10 @@ class UserController extends Controller
         
         // create
         $input = $request->only(['name', 'password', 'level_akses']);
+        echo $name.' \n';
+        var_dump($input);
 
-        return User::where('name', $name)->update($input); //returns the new value if the operation was successful.
+        return User::findorFail($name)->update($input); //returns the new value if the operation was successful.
     }
 
     /**
