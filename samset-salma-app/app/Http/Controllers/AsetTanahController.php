@@ -109,8 +109,8 @@ class AsetTanahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only(['Jalan', 'No', 'RT', 'RW', 'Desa_Kelurahan', 'Kecamatan', 'Kabupaten_Kota', 'Propinsi', 'Tanggal_Perolehan', 'No_Persil', 'No_Sertifikat', 'NIB', 'Luas', 'Harga_Satuan', 'Nilai_Perolehan', 'Keterangan']);
-
+        $item = new AsetTanah();
+        $input = $request->only($item->getLabel());
         return AsetTanah::where('Idx', $id)->update($input);
     }
 

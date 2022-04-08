@@ -109,7 +109,8 @@ class AsetFurniturePeralatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only(['nama_barang', 'merk_type', 'kategori', 'tahun_perolehan', 'sumber_perolehan', 'jumlah_perolehan', 'harga_satuan_perolehan', 'nilai_perolehan', 'UE_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'PJ']);
+        $item = new AsetFurniturePeralatan();
+        $input = $request->only($item->getLabel());
 
         return AsetFurniturePeralatan::where('Idx', $id)->update($input);
     }

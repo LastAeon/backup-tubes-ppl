@@ -114,7 +114,12 @@ class AsetBangunanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only(['Nama Bangunan', 'Alamat', 'Luas_Bangunan', 'Jumlah_Lantai', 'Tahun_Dibangun', 'Tahun_Digunakan', 'Nilai_Perolehan', 'Penambahan_Nilai_Manfaat', 'Umur_Ekonomis', 'Lama_Digunakan', 'Tarif', 'Akumulasi', 'Nilai_Buku']);
+        $item = new AsetBangunan();
+        $label = $item->getLabel();
+        $input = $request->only($label);
+        var_dump($request->all());
+        var_dump($label);
+        var_dump($input);
 
         return AsetBangunan::where('Idx', $id)->update($input);
     }

@@ -109,8 +109,9 @@ class AsetKendaraanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only(['Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj']);
-
+        $item = new AsetKendaraan();
+        $input = $request->only($item->getLabel());
+        
         return AsetKendaraan::where('Idx', $id)->update($input);
     }
 
