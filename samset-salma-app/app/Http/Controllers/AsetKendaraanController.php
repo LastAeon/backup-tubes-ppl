@@ -112,7 +112,7 @@ class AsetKendaraanController extends Controller
         $item = new AsetKendaraan();
         $input = $request->only($item->getLabel());
         
-        return AsetKendaraan::where('Idx', $id)->update($input);
+        if($input!=null) return AsetKendaraan::where('Idx', $id)->update($input);
     }
 
     /**

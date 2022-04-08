@@ -117,11 +117,8 @@ class AsetBangunanController extends Controller
         $item = new AsetBangunan();
         $label = $item->getLabel();
         $input = $request->only($label);
-        var_dump($request->all());
-        var_dump($label);
-        var_dump($input);
-
-        return AsetBangunan::where('Idx', $id)->update($input);
+        
+        if($input!=null) return AsetBangunan::where('Idx', $id)->update($input);
     }
 
     /**

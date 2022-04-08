@@ -112,7 +112,7 @@ class AsetFurniturePeralatanController extends Controller
         $item = new AsetFurniturePeralatan();
         $input = $request->only($item->getLabel());
 
-        return AsetFurniturePeralatan::where('Idx', $id)->update($input);
+        if($input!=null) return AsetFurniturePeralatan::where('Idx', $id)->update($input);
     }
 
     /**

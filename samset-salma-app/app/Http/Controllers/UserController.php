@@ -117,7 +117,7 @@ class UserController extends Controller
         // create
         $input = $request->only(['name', 'password', 'level_akses']);
 
-        return User::findorFail($name)->update($input); //returns the new value if the operation was successful.
+        if($input!=null) return User::findorFail($name)->update($input); //returns the new value if the operation was successful.
     }
 
     /**

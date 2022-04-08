@@ -163,28 +163,29 @@ Route::post("asetBangunan/update/{id}", function(Request $request, $id){
     $item = new AsetBangunan();
     $input = $request->only($item->getLabel());
 
-    return AsetBangunan::where('Idx', $id)->update($input);
+
+    if($input!=null) return AsetBangunan::where('Idx', $id)->update($input);
 });
 Route::post("asetTanah/update", function(Request $request, $id){
 
     $item = new AsetTanah();
     $input = $request->only($item->getLabel());
 
-    return AsetTanah::where('Idx', $id)->update($input);
+    if($input!=null) return AsetTanah::where('Idx', $id)->update($input);
 });
 Route::post("asetFurniturPeralatan/update/{id}", function(Request $request, $id){
 
     $item = new AsetKendaraan();
     $input = $request->only($item->getLabel());
 
-    return AsetKendaraan::where('Idx', $id)->update($input);
+    if($input!=null) return AsetKendaraan::where('Idx', $id)->update($input);
 });
 Route::post("asetKendaraan/update/{id}", function(Request $request, $id){
 
     $item = new AsetKendaraan();
     $input = $request->only($item->getLabel());
 
-    return AsetKendaraan::where('Idx', $id)->update($input);
+    if($input!=null) return AsetKendaraan::where('Idx', $id)->update($input);
 });
 Route::post("account/update/{name}", function(Request $request, $name){
 
@@ -205,7 +206,7 @@ Route::post("account/update/{name}", function(Request $request, $name){
     // create
     $input = $request->only(['name', 'password', 'level_akses']);
 
-    return User::findorFail($name)->update($input); //returns the new value if the operation was successful.
+    if($input!=null) return User::findorFail($name)->update($input); //returns the new value if the operation was successful.
 });
 
 // login
