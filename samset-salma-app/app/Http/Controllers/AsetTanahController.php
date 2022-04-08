@@ -75,9 +75,7 @@ class AsetTanahController extends Controller
             $image_uploaded_path = $image->store($uploadFolder, 'public');
             $data['Pendukung'] = asset('storage/'.$image_uploaded_path);
         }
-        $item->create($data); 
-
-        return $data; //returns the stored value if the operation was successful.
+        return $item->create($data); //returns the stored value if the operation was successful.
     }
 
     /**

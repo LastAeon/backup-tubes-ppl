@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Traits\Observable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -77,6 +78,12 @@ class AsetTanah extends Model
         static::created(function ($model) {
             $model->Global_Id = $model->tableCode . $model->Idx;
             $model->saveQuietly();
+        });
+        static::saving(function ($model) {
+            // auto fill filed on every time data saved/changed
+            if($model->isDirty(['Harga_Satuan', 'Luas']) && !$model->isDirty('Nilai_Perolehan') && $model->Harga_Satuan!==null && $model->Luas!==null){
+                $model->Nilai_Perolehan =  $model->Harga_Satuan*$model->Luas;
+            }
         });
     }
 
