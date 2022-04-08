@@ -16,7 +16,7 @@ tipe: get
 ## search(global_id)
 callpoint: api/history/search/{global_id}\
 tipe manggilnya get\
-global_id merupakan kolom baru dari tabel aset yang terdiri dari kode tabel dan index eg. AB1, AFP10
+global_id merupakan kolom baru dari tabel aset yang terdiri dari kode tabel dan index eg. AB1, AFP10\
 kode tabel aset sebagai berikut:
 - asetTanah                 -> AT
 - asetBangunan              -> AB
