@@ -13,10 +13,6 @@ aset bangunan:
 'Nilai_Perolehan',
 'Penambahan_Nilai_Manfaat',
 'Umur_Ekonomis',
-'Lama_Digunakan',
-'Tarif',
-'Akumulasi',
-'Nilai_Buku',
 'Foto',
 'Pendukung',
 
@@ -30,9 +26,7 @@ aset furniture dan peralatan:
 'harga_satuan_perolehan',
 'nilai_perolehan',
 'UE_penyusutan',
-'tarif_penyusutan',
 'akumulasi_penyusutan',
-'nilai_buku',
 'PJ',
 'Foto',
 'Pendukung',
@@ -49,9 +43,7 @@ aset kendaraan:
 'jumlah_unit',
 'nilai_perolehan',
 'ue_penyusutan',
-'tarif_penyusutan',
 'akumulasi_penyusutan',
-'nilai_buku',
 'pj',
 'Foto',
 'Pendukung',
@@ -75,3 +67,22 @@ aset tanah:
 'Keterangan',
 'Foto',
 'Pendukung',
+
+
+terisi otomatis:
+aset bangunan:
+'Lama_Digunakan',
+'Tarif',
+'Akumulasi',
+'Nilai_Buku',
+
+aset furniture dan peralatan:
+'tarif_penyusutan',
+'nilai_buku',
+
+aset kendaraan:
+'tarif_penyusutan',
+'nilai_buku',
+
+aset tanah:
+gaada

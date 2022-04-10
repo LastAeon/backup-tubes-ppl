@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Traits\Observable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -59,9 +60,9 @@ class AsetKendaraan extends Model
         'jumlah_unit',
         'nilai_perolehan',
         'ue_penyusutan',
-        'tarif_penyusutan',
+        // 'tarif_penyusutan',
         'akumulasi_penyusutan',
-        'nilai_buku',
+        // 'nilai_buku',
         'pj',
     ];
 
@@ -75,6 +76,16 @@ class AsetKendaraan extends Model
         static::created(function ($model) {
             $model->Global_Id = $model->tableCode . $model->Idx;
             $model->saveQuietly();
+        });
+        static::saving(function ($model) {
+            // auto fill filed on every time data saved/changed
+            if($model->isDirty('ue_penyusutan') && $model->ue_penyusutan !== null){
+                $model->tarif_penyusutan = 100/$model->ue_penyusutan;
+            }
+            // akumulasi masih bingung
+            if($model->isDirty(['nilai_perolehan', 'akumulasi_penyusutan']) && $model->nilai_perolehan !== null && $model->akumulasi_penyusutan !== null){
+                $model->nilai_buku = $model->nilai_perolehan - $model->akumulasi_penyusutan;
+            }
         });
     }
 

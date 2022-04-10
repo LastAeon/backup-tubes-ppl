@@ -75,9 +75,7 @@ class AsetTanahController extends Controller
             $image_uploaded_path = $image->store($uploadFolder, 'public');
             $data['Pendukung'] = asset('storage/'.$image_uploaded_path);
         }
-        $item->create($data); 
-
-        return $data; //returns the stored value if the operation was successful.
+        return $item->create($data); //returns the stored value if the operation was successful.
     }
 
     /**
@@ -111,9 +109,9 @@ class AsetTanahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only(['Jalan', 'No', 'RT', 'RW', 'Desa_Kelurahan', 'Kecamatan', 'Kabupaten_Kota', 'Propinsi', 'Tanggal_Perolehan', 'No_Persil', 'No_Sertifikat', 'NIB', 'Luas', 'Harga_Satuan', 'Nilai_Perolehan', 'Keterangan']);
-
-        return AsetTanah::where('Idx', $id)->update($input);
+        $item = new AsetTanah();
+        $input = $request->only($item->getLabel());
+        if($input!=null) return AsetTanah::where('Idx', $id)->update($input);
     }
 
     /**

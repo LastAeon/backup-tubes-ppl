@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Observable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @property int $Idx
@@ -55,10 +57,10 @@ class AsetBangunan extends Model
         'Nilai_Perolehan',
         'Penambahan_Nilai_Manfaat',
         'Umur_Ekonomis',
-        'Lama_Digunakan',
-        'Tarif',
-        'Akumulasi',
-        'Nilai_Buku',
+        // 'Lama_Digunakan',
+        // 'Tarif',
+        // 'Akumulasi',
+        // 'Nilai_Buku',
     ];
 
     
@@ -73,9 +75,34 @@ class AsetBangunan extends Model
             $model->Global_Id = $model->tableCode . $model->Idx;
             $model->saveQuietly();
         });
+        static::saving(function ($model) {
+            // auto fill filed on every time data saved/changed
+            if($model->isDirty('Tahun_Digunakan') && $model->Tahun_Digunakan !== null){
+                $model->Lama_Digunakan = Carbon::now()->format('Y') - $model->Tahun_Digunakan;
+            }
+            if($model->isDirty('Umur_Ekonomis') && $model->Umur_Ekonomis !== null){
+                $model->Tarif = 100/$model->Umur_Ekonomis;
+            }
+            // ikutin excel
+            // $model->Akumulasi = $model->Nilai_Perolehan!==null && $model->Lama_Digunakan!==null && $model->Tarif!==null ? null :  $model->Nilai_Perolehan*$model->Lama_Digunakan*$model->Tarif;
+            // ikutin wa
+            if($model->isDirty(['Nilai_Perolehan', 'Lama_Digunakan', 'Tarif', 'Penambahan_Nilai_Manfaat']) && $model->Nilai_Perolehan!==null && $model->Lama_Digunakan!==null && $model->Tarif!==null && $model->Penambahan_Nilai_Manfaat!==null){
+                $model->Akumulasi = ($model->Nilai_Perolehan+$model->Penambahan_Nilai_Manfaat)*$model->Lama_Digunakan*$model->Tarif/100;
+            }
+            if($model->isDirty(['Nilai_Perolehan', 'Akumulasi', 'Penambahan_Nilai_Manfaat']) && $model->Nilai_Perolehan!==null && $model->Penambahan_Nilai_Manfaat!==null && $model->Akumulasi!==null){
+                $model->Nilai_Buku = $model->Nilai_Perolehan+$model->Penambahan_Nilai_Manfaat-$model->Akumulasi;
+            }
+        });
     }
 
     public function new(){
         return new AsetBangunan();
     }
 }
+/*
+[14:48, 4/5/2022] Ian Nurdin Salman PPL: Lama Digunakan = Tahun berjalan - tahun digunakan -> gak ada tahun berjalan, ganti jadi tahun sekarang
+[14:48, 4/5/2022] Ian Nurdin Salman PPL: Tarif penyusutan = 100% : usia ekonomi -> done
+[14:49, 4/5/2022] Ian Nurdin Salman PPL: Akumulasi penyusutan = Lama digunakan x tarif penyusutan x (nilai perolehan + penambahan nilai manfaat) -> done
+[14:49, 4/5/2022] Ian Nurdin Salman PPL: Nilai Buku = Nilai Perolehan + Penambahan Nilai Manfaat - Akumulasi Penyusutan -> done
+[14:50, 4/5/2022] Ian Nurdin Salman PPL: Untuk tahun berjalan bisa juga diinput manual saja -> masih bingung
+*/

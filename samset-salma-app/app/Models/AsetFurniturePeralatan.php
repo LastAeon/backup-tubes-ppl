@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Traits\Observable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -55,9 +56,9 @@ class AsetFurniturePeralatan extends Model
         'harga_satuan_perolehan',
         'nilai_perolehan',
         'UE_penyusutan',
-        'tarif_penyusutan',
+        // 'tarif_penyusutan',
         'akumulasi_penyusutan',
-        'nilai_buku',
+        // 'nilai_buku',
         'PJ',
     ];
 
@@ -71,6 +72,19 @@ class AsetFurniturePeralatan extends Model
         static::created(function ($model) {
             $model->Global_Id = $model->tableCode . $model->Idx;
             $model->saveQuietly();
+        });
+        static::saving(function ($model) {
+            // auto fill filed on every time data saved/changed
+            if($model->isDirty('UE_penyusutan') && $model->UE_penyusutan !== null){
+                $model->tarif_penyusutan = 100/$model->UE_penyusutan;
+            }
+            if($model->isDirty(['Nilai_Perolehan', 'Akumulasi']) && $model->Nilai_Perolehan!==null && $model->Akumulasi!==null){
+                $model->Nilai_Buku = $model->Nilai_Perolehan-$model->Akumulasi;
+            }
+        });
+        // also logging
+        static::deleted(function (Model $model) {
+            $this->DataDeleted($model);
         });
     }
 

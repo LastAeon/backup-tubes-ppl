@@ -75,9 +75,7 @@ class AsetKendaraanController extends Controller
             $image_uploaded_path = $image->store($uploadFolder, 'public');
             $data['Pendukung'] = asset('storage/'.$image_uploaded_path);
         }
-        $item->create($data);   
-
-        return $data; //returns the stored value if the operation was successful.
+        return $item->create($data); //returns the stored value if the operation was successful.
     }
 
     /**
@@ -111,9 +109,10 @@ class AsetKendaraanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->only(['Jenis_merk', 'nomor_mesin', 'nomor_rangka', 'isi_silinder', 'tahun_pembuatan', 'no_bpkb', 'no_polisi', 'sumber_dana', 'jumlah_unit', 'nilai_perolehan', 'ue_penyusutan', 'tarif_penyusutan', 'akumulasi_penyusutan', 'nilai_buku', 'pj']);
-
-        return AsetKendaraan::where('Idx', $id)->update($input);
+        $item = new AsetKendaraan();
+        $input = $request->only($item->getLabel());
+        
+        if($input!=null) return AsetKendaraan::where('Idx', $id)->update($input);
     }
 
     /**
