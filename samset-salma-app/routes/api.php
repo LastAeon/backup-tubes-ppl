@@ -155,6 +155,11 @@ Route::get("history/interval/{interval}", function($interval){
     return "wrong interval";
 });
 
+// search history
+Route::get("history/search/{global_id}", function($global_id){
+    return ChangeLog::where('global_id', $global_id)->get();
+});
+
 // Update
 
 // request body : {"Idx" : 3 , "key" : "value"}
