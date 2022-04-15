@@ -169,28 +169,28 @@ Route::post("asetBangunan/update/{id}", function(Request $request, $id){
     $input = $request->only($item->getLabel());
 
 
-    if($input!=null) return AsetBangunan::where('Idx', $id)->update($input);
+    if($input!=null) return AsetBangunan::find($id)->update($input);
 });
 Route::post("asetTanah/update", function(Request $request, $id){
 
     $item = new AsetTanah();
     $input = $request->only($item->getLabel());
 
-    if($input!=null) return AsetTanah::where('Idx', $id)->update($input);
+    if($input!=null) return AsetTanah::find($id)->update($input);
 });
 Route::post("asetFurniturPeralatan/update/{id}", function(Request $request, $id){
 
     $item = new AsetKendaraan();
     $input = $request->only($item->getLabel());
 
-    if($input!=null) return AsetKendaraan::where('Idx', $id)->update($input);
+    if($input!=null) return AsetKendaraan::find($id)->update($input);
 });
 Route::post("asetKendaraan/update/{id}", function(Request $request, $id){
 
     $item = new AsetKendaraan();
     $input = $request->only($item->getLabel());
 
-    if($input!=null) return AsetKendaraan::where('Idx', $id)->update($input);
+    if($input!=null) return AsetKendaraan::find($id)->update($input);
 });
 Route::post("account/update/{name}", function(Request $request, $name){
 
