@@ -111,7 +111,7 @@ class AsetTanahController extends Controller
     {
         $item = new AsetTanah();
         $input = $request->only($item->getLabel());
-        if($input!=null) return AsetTanah::where('Idx', $id)->update($input);
+        if($input!=null) return AsetTanah::find($id)->update($input);
     }
 
     /**
