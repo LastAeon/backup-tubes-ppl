@@ -45,7 +45,7 @@ class AsetBangunanController extends Controller
             $rules[$label] = 'nullable';
         }
         $rules['Foto'] = 'nullable|image';
-        $rules['Pendukung'] = 'nullable|image';
+        $rules['Pendukung'] = 'nullable|file';
         // var_dump($rules);
         $validator = Validator::make($request->all(), $rules);
 
