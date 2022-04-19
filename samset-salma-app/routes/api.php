@@ -171,7 +171,7 @@ Route::post("asetBangunan/update/{id}", function(Request $request, $id){
 
     if($input!=null) return AsetBangunan::find($id)->update($input);
 });
-Route::post("asetTanah/update", function(Request $request, $id){
+Route::post("asetTanah/update/{id}", function(Request $request, $id){
 
     $item = new AsetTanah();
     $input = $request->only($item->getLabel());
