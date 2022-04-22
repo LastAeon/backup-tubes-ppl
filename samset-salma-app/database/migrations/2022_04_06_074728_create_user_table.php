@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->primary();
             $table->string('password')->nullable();
             $table->integer('level_akses');
+            $table->string('api_token')->nullable();
         });
     }
 
