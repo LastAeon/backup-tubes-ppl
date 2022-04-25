@@ -7,7 +7,12 @@ body isinya:\
 name:{username}\
 password:{password}
 
-jika username dan password benar akan mereturn nilai level akses eg. 0, 1, 2\
+jika username dan password benar akan mereturn nilai level akses dan api_key, contoh:\
+{\
+    "level": 0,\
+    "api_token": {string random 100 karakter}\
+}
+
 jika username/password salah akan me return -1 
 
 contoh: (pakai data dummy dalem seeder)\

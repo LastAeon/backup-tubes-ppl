@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Auth::viaRequest('api_token', function ($request) {
-            if($request != null){
+            if($request->header('api_token') != null){
                 return User::where('api_token', '=', $request->header('api_token'))->first();
             }
         });
